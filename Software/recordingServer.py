@@ -47,7 +47,7 @@ names = ["Never Gonna Give You Up", "Late Night", "Blue Hair"]
 curSong = 0
 songPlaying = 0
 manualInput = False
-NUM_RECORD = 100
+NUM_RECORD = 200
 recording = np.zeros(NUM_RECORD)
 rec_times = np.zeros(NUM_RECORD)
 record_in = 0
@@ -90,12 +90,15 @@ def playRecording():
         play_obj.stop()
         time.sleep(0.3)
     for i in range(record_in):
-        if recording[i] > 0:
-            if play_obj.is_playing():
-                play_obj.stop()
-                time.sleep(0.3)
-            play_obj = sa.play_buffer(audios[recording[i]], 1, 2, fs)
+        if play_obj.is_playing():
+            play_obj.stop()
+            time.sleep(0.3)
+        if recording[i] >= 0:
+            play_obj = sa.play_buffer(audios[int(recording[i])], 1, 2, fs)
         time.sleep(rec_times[i])
+
+    play_obj.stop()
+    time.sleep(0.3)
 
 app = Flask(__name__)
 app.secret_key = "my_key"
@@ -125,6 +128,7 @@ def action(flag):
     global getLines
     global audios
     global record_in
+    global recording
     if flag == "prev": 
         curSong = (curSong + NUM_SONGS - 1) % NUM_SONGS
         if play_obj.is_playing():
@@ -195,6 +199,13 @@ def action(flag):
                     record_in = 0
                     time_start = time.perf_counter()
                     time_stop = time.perf_counter()
+                else:
+                    templateData = {
+                        'song'  : names[curSong],
+                        'play_str'  : "Pause",
+                        'mode_str'  : "Manual"
+                    }
+                    return render_template('index.html', **templateData)
                 while getLines.get_values()[1] == 1:
                     pass
             inputF.seek(0)
