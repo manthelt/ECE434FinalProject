@@ -44,7 +44,7 @@ getLines.request(consumer=CONSUMER, type=gpiod.LINE_REQ_DIR_IN)
 NUM_SONGS = 3
 songs = [sa.WaveObject.from_wave_file('Rickroll.wav'), sa.WaveObject.from_wave_file('LateAtNight.wav'), sa.WaveObject.from_wave_file('BlueHair.wav')]
 names = ["Never Gonna Give You Up", "Late Night", "Blue Hair"]
-curSong = 0
+curSong = 1
 songPlaying = 0
 manualInput = False
 NUM_RECORD = 200
@@ -180,12 +180,6 @@ def action(flag):
             return render_template('index.html', **templateData)
     if flag == "playback":
         playRecording()
-        templateData = {
-            'song'  : names[curSong],
-            'play_str'  : "Play",
-            'mode_str'  : "Manual"
-        }
-        return render_template('index.html', **templateData)
     if flag == "mode":
         record = False
         time_start = time.perf_counter()
@@ -239,6 +233,12 @@ def action(flag):
                     'mode_str'  : "Manual"
                 }
                 return render_template('index.html', **templateData)
+    templateData = {
+        'song'  : names[curSong],
+        'play_str'  : "Play",
+        'mode_str'  : "Manual"
+    }
+    return render_template('index.html', **templateData)
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=8081, debug=True)
