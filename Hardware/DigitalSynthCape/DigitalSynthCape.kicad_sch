@@ -2026,7 +2026,7 @@
     (property "Value" "R_Potentiometer" (at 106.68 55.88 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "" (at 109.22 54.61 0)
+    (property "Footprint" "Potentiometer_THT:Potentiometer_Bourns_PTA1543_Single_Slide" (at 109.22 54.61 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 109.22 54.61 0)
