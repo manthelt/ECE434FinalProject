@@ -1815,6 +1815,32 @@
     )
   )
 
+  (symbol (lib_id "Resistors:R") (at 135.89 133.35 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 29c91c8f-0083-455d-8541-d5e06a130979)
+    (property "Reference" "R2" (at 138.43 132.08 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "R" (at 138.43 134.62 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "Resistor_SMD:R_1206_3216Metric" (at 135.89 152.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 134.62 147.32 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid fb6922bb-f104-40c1-a0aa-0865449033c9))
+    (pin "2" (uuid d08b3bb6-53a8-4bf7-a9bc-44295abb4b98))
+    (instances
+      (project "DigitalSynthCape"
+        (path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
+          (reference "R2") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Resistors:R") (at 187.96 133.35 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 2b3f3dbb-ddeb-44a0-92f8-3d3d0197466d)
@@ -1913,32 +1939,6 @@
       (project "DigitalSynthCape"
         (path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
           (reference "R10") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Resistors:R") (at 135.8681 133.3196 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid 45cf5b6a-43c1-497b-a449-f1cfafab2bd7)
-    (property "Reference" "R2" (at 138.4081 132.0496 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "R" (at 138.4081 134.5896 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "Resistor_SMD:R_1206_3216Metric" (at 135.8681 152.3696 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 134.5981 147.2896 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 6623631a-1f08-4eb8-8f71-16905598ebcb))
-    (pin "2" (uuid cf8404c9-5a63-49c2-bd0c-03ba3a9a3731))
-    (instances
-      (project "DigitalSynthCape"
-        (path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
-          (reference "R2") (unit 1)
         )
       )
     )

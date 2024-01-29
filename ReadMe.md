@@ -23,7 +23,7 @@ Logan Manthey
 ## Executive Summary
 Picture that summarizes the project.
 
-| ![Boris](RenderV1.png) | 
+| ![PCBRender](RenderV2.png) | 
 |:--:| 
 | *This shows a quick mock up of the BeagleBoneCape for my Synth* |
 
