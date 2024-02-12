@@ -64,6 +64,44 @@ Include a YouTube demo the audio description.
 ## Theory of Operation
 Give a high level overview of the structure of your software. Are you using GStreamer? Show a diagram of the pipeline. Are you running multiple tasks? Show what they do and how they interact.
 
+
+
+### Hardware
+This section decribes the hardware portion of the project and which parts and designs were used.
+
+#### Keyboard Section
+This section decribes the keyboard section of the hardware and it's theory of operation 
+
+##### Resistor List for Note Values
+Note  Ohm
+0     47000
+1     33000
+2     22000
+3     15000
+4     10000
+5     6800
+6     4700
+7     3300
+8     2200
+9     1500
+10    1000
+11    680
+12    470
+13    330
+14    220
+15    150
+16    100
+17    0
+
+#### Pot Section
+This section talks about how the pot is connected
+
+
+### Software
+
+#### Reading in the values
+
+
 ## Work Breakdown
 List the major tasks in your project and who did what.
 
