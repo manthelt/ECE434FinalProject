@@ -26,9 +26,16 @@ DS5 = 622.25
 E5 = 659.25
 
 frequencies = [C4, CS4, D4, DS4, E4, F4, FS4, G4, GS4, A4, AS4, B4, C5, CS5, D5, DS5, E5]
+ranges = [4000, 3900, 3800, 3700, 3500, 3350, 3100, 2800, 2500, 2100, 1700, 1300, 1200, 750, 550, 400, 50]
 inputF = open('/sys/bus/iio/devices/iio:device0/in_voltage0_raw', "r")
 frequency = 0
 audios = np.ones(dtype=np.int16, shape=(numNotes, seconds * fs))
+
+def getIndex(val):
+    for i in range(numNotes):
+        if val >= ranges[i]:
+            return i
+    return -1
 
 for i in range(numNotes):
     frequency = frequencies[i]
@@ -48,21 +55,29 @@ for i in range(numNotes):
 
 aVal = int(inputF.read())
 inputF.seek(0)
-frequency = frequencies[int(aVal/241)]
+frequency = frequencies[getIndex(aVal)]
 
 # Start playback
 play_obj = sa.play_buffer(audios[i], 1, 2, fs)
+play_obj.stop()
 
 firstTime = 1
 while True:
     inputF.seek(0)
     aVal = int(inputF.read())
-    if frequency != frequencies[int(aVal/241)]:
-        frequency = frequencies[int(aVal/241)]
-
+    time.sleep(0.001)
+    inputF.seek(0)
+    aVal2 = int(inputF.read())
+    if aVal != aVal2:
+        continue
+    index = getIndex(aVal)
+    if index < 0 or aVal <= 30:
+        frequency = 0
+        play_obj.stop()
+    if index >= 0 and frequency != frequencies[index] and aVal > 30:
+        frequency = frequencies[index]
         # Start playback
         play_obj.stop()
-        time.sleep(0.3)
-        play_obj = sa.play_buffer(audios[int(aVal/241)], 1, 2, fs)
-
+        time.sleep(0.35)
+        play_obj = sa.play_buffer(audios[index], 1, 2, fs)
 
