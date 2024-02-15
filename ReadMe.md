@@ -75,11 +75,44 @@ Give a high level overview of the structure of your software. Are you using GStr
 ### Hardware
 This section decribes the hardware portion of the project and which parts and designs were used.
 
+#### BOM
+    - 17 1206 Resistor of Varying Sizes
+      -  [Resistor List for Note Values](#resistor-list-for-note-values)
+    - 1 Potenimeter
+    - 2 2 Pin Male Connectors
+    - 1 1 Pin Male Connector 
+*Note for the connectors I used large ones that I cut down to size*
+
 #### Keyboard Section
 This section decribes the keyboard section of the hardware and it's theory of operation 
 
+| ![PCBRende:r](Hardware/RenderV4.png) | 
+|:--:| 
+| *Beagle Bone Keyboard Cape Render* |
+
+In short this keyboard acts as a form of potenimeter where connecting the 1.8 volt line to the different nets allows a different value to be read by the analog input as there is a different resistor connected to each one of the note nets.
+
+##### Schematic and PCB
+The keyboard cape was designed using KiCAD EDA software. KiCAD is an open source easy to use EDA software that allowed us to quickly design and then print out a PCB prototype on campus using the CNC mill. If we were going to redesign this for real manufacture we would add more headers to make it more stable. We would also add a spot for a pull down resistor to the board itself.
+
+
+| ![PCBRende:r](Hardware/Sch.png) | 
+|:--:| 
+| *Beagle Bone Keyboard Cape Schematic View* |
+
+
+| ![PCBRende:r](Hardware/PCBView.png) | 
+|:--:| 
+| *Beagle Bone Keyboard Cape PCB View* |
+
+
+| ![PCBRende:r](Hardware/Printed.png) | 
+|:--:| 
+| *Beagle Bone Keyboard Cape Inital CNC Print* |
+
+
 ##### Resistor List for Note Values
-These values were choosen to allow for a somewhat even distrubtion of values which will translate to a even distrubtion of values. 
+These values were chosen to allow for a somewhat even distrubtion of values which will translate to a even distrubtion of values. We then added a pull down resistor to allow for a even larger distributing of notes. 
 
 ```
 Note  Ohm
@@ -104,9 +137,11 @@ Note  Ohm
 ```
 
 #### Pot Section
-This section talks about how the pot is connected
+In addition to the keyboard acting as a potenimeter there is also a normal potenimeter that can act as a volume control or however you would like to program it. That potenimeter is located here.
 
-Insert Photo of the pot in the design along with where it is in real life
+| ![PCBRende:r](Hardware/SecondaryPot.png) | 
+|:--:| 
+| *Beagle Bone Keyboard Cape Inital Print* |
 
 
 ### Software
@@ -122,16 +157,22 @@ Talk about how the software boots up on startup
 
 
 ## Work Breakdown
-List the major tasks in your project and who did what.
+
+- PCB Design and Solder
+  Logan
+
+- Sound Generation and USB Audio
+
+- LCD Audio
 
 Also list here what doesn't work yet and when you think it will be finished and who is finishing it.
 
 ## Future Work
+In the future we would modify the cape a bit and add a spot for a pull down resistor along with getting it professionally printed to allow for a silk screen on it. I would also add more pins to the header to allow for more stability.
+
 Suggest addition things that could be done with this project.
 
 ## Conclusions
 Give some concluding thoughts about the project. Suggest some future additions that could make it even more interesting.
 
 
-### Hardware Improvements
-When creating capes in the future I would add in more pins to ensure more structual stability. 
