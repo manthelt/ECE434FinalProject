@@ -49,11 +49,18 @@ The sentence count is approximate and only to give an idea of the expected lengt
 -->
 
 ## Packaging
-If you have hardware, consider Small Build, Big Execuition for ideas on the final packaging.
+***If you have hardware, consider Small Build, Big Execuition for ideas on the final packaging.
 
 ## Installation Instructions
-Give step by step instructions on how to install your project.
+***Give step by step instructions on how to install your project.
+- Read-only GitHub: https://github.com/manthelt/ECE434FinalProject
 
+1. Clone the repo
+2. Run sudo ./install.sh
+3. Run sudo ./setup.sh
+
+- Custom PCB schematic in 'Schematic and PCB'
+- USB Surround Sound Adapter: https://sabrent.com/products/usb-sbcv
 <!-- Include your github path as a link like this to the read-only git site: https://github.com/MarkAYoder/gitLearn. -->
 <!-- Be sure your README.md is includes an up-to-date and clear description of your project so that someone who comes across you git repository can quickly learn what you did and how they can reproduce it. -->
 <!-- Include a Makefile for your code if using C. -->
@@ -62,23 +69,23 @@ Give step by step instructions on how to install your project.
 <!-- If there is extra hardware needed, include links to where it can be obtained. -->
 
 ## User Instructions
-Once everything is installed, how do you use the program? Give details here, so if you have a long user manual, link to it here.
-Consider making it autostart for full credit.
+1. Run ./soundExperiments.py
+2. Visit https://localhost:8081
+***Consider making it autostart for full credit. (add line to setup.sh)
 
 ## Highlights
-Here is where you brag about what your project can do.
+***Here is where you brag about what your project can do.
 
 
 ### Video
-Here is a video that shows our project in operation.
+***Here is a video that shows our project in operation.
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
 
 
 <!-- Include a YouTube demo the audio description. -->
 
 ## Theory of Operation
-Give a high level overview of the structure of your software. Are you using GStreamer? Show a diagram of the pipeline. Are you running multiple tasks? Show what they do and how they interact.
-
+***Give a high level overview of the structure of your software. Are you using GStreamer? Show a diagram of the pipeline. Are you running multiple tasks? Show what they do and how they interact.
 
 
 
@@ -100,7 +107,7 @@ This section decribes the keyboard section of the hardware and it's theory of op
 |:--:| 
 | *Beagle Bone Keyboard Cape Render* |
 
-In short this keyboard acts as a form of potenimeter where connecting the 1.8 volt line to the different nets allows a different value to be read by the analog input as there is a different resistor connected to each one of the note nets.
+In short this keyboard acts as a form of potentiometer where connecting the 1.8 volt line to the different nets allows a different value to be read by the analog input as there is a different resistor connected to each one of the note nets.
 
 ##### Schematic and PCB
 The keyboard cape was designed using KiCAD EDA software. KiCAD is an open source easy to use EDA software that allowed us to quickly design and then print out a PCB prototype on campus using the CNC mill. If we were going to redesign this for real manufacture we would add more headers to make it more stable. We would also add a spot for a pull down resistor to the board itself.
@@ -147,7 +154,7 @@ Note  Ohm
 ```
 
 #### Pot Section
-In addition to the keyboard acting as a potenimeter there is also a normal potenimeter that can act as a volume control or however you would like to program it. That potenimeter is located here.
+In addition to the keyboard acting as a potentiometer there is also a normal potentiometer that can act as a volume control or however you would like to program it. That potentiometer is located here.
 
 | ![PCBRende:r](Hardware/SecondaryPot.png) | 
 |:--:| 
@@ -157,13 +164,14 @@ In addition to the keyboard acting as a potenimeter there is also a normal poten
 ### Software
 
 #### Reading in the values
-Talk about how the values are read in
+- Analog input via /sys/bus/iio
+- Button input via gpio
 
 #### Creating Sound
-This section talks about how the sound is created 
+***This section talks about how the sound is created 
 
 #### Start Up
-Talk about how the software boots up on startup
+***Talk about how the software boots up on startup
 
 
 ## Work Breakdown
@@ -172,17 +180,23 @@ Talk about how the software boots up on startup
   Logan
 
 - Sound Generation and USB Audio
+  Logan, Ash, Larissa
 
-- LCD Audio
+- LCD Visualisation (not working - dropped)
+  Ash, Larissa
 
-Also list here what doesn't work yet and when you think it will be finished and who is finishing it.
+- Flask
+  Ash, Larissa
+
+- Documentation
+  Logan, Ash, Larissa
 
 ## Future Work
-In the future we would modify the cape a bit and add a spot for a pull down resistor along with getting it professionally printed to allow for a silk screen on it. I would also add more pins to the header to allow for more stability.
+In the future we would modify the cape a bit and add a spot for a pull down resistor along with getting it professionally printed to allow for a silk screen on it. I would also add more pins to the header to allow for more stability. We would also like to be able to get audio visualisation via the LCD working.
 
-Suggest addition things that could be done with this project.
+***Suggest addition things that could be done with this project.
 
 ## Conclusions
-Give some concluding thoughts about the project. Suggest some future additions that could make it even more interesting.
+***Give some concluding thoughts about the project. Suggest some future additions that could make it even more interesting.
 
 
