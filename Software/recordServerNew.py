@@ -14,6 +14,19 @@ fs = 44100  # 44100 samples per second
 seconds = 20  # Note duration of 3 seconds
 numNotes = 17
 
+C3 = 130.81
+CS3 = 138.59
+D3 = 146.83
+DS3 = 155.56
+E3 = 164.81
+F3 = 174.61
+FS3 = 185
+G3 = 196
+GS3 = 207.65
+A3 = 220
+AS3 = 233.08
+B3 = 246.94
+
 C4 = 261.63
 CS4 = 277.18
 D4 = 293.66
@@ -32,11 +45,12 @@ D5 = 587.33
 DS5 = 622.25
 E5 = 659.25
 
-frequencies = [C4, CS4, D4, DS4, E4, F4, FS4, G4, GS4, A4, AS4, B4, C5, CS5, D5, DS5, E5]
+frequencies = [C3, CS3, D3, DS3, E3, F3, FS3, G3, GS3, A3, AS3, B3, C4, CS4, D4, DS4, E4 ,C4, CS4, D4, DS4, E4, F4, FS4, G4, GS4, A4, AS4, B4, C5, CS5, D5, DS5, E5]
 ranges = [4000, 3900, 3800, 3700, 3500, 3350, 3000, 2800, 2500, 2100, 1700, 1300, 1200, 750, 550, 400, 50]
 inputF = open('/sys/bus/iio/devices/iio:device0/in_voltage0_raw', "r")
+inputF2 = open('/sys/bus/iio/devices/iio:device0/in_voltage1_raw', "r")
 frequency = 0
-audios = np.ones(dtype=np.int16, shape=(numNotes, seconds * fs))
+audios = np.ones(dtype=np.int16, shape=(numNotes*2, seconds * fs))
 CONSUMER = 'sounds'
 switchChip = gpiod.Chip('0')
 getLines = switchChip.get_lines([30, 31])
@@ -60,7 +74,7 @@ def getIndex(val):
             return i
     return -1
 
-for i in range(numNotes):
+for i in range(numNotes*2):
     frequency = frequencies[i]
     # Generate array with seconds*sample_rate steps, ranging between 0 and seconds
     t_short = np.linspace(0, 1/frequency, int(fs/frequency), False)
@@ -107,8 +121,9 @@ app.secret_key = "my_key"
 @app.route("/")
 def index():
     global names
+    global curSong
     templateData = {
-        'song'  : names[0],
+        'song'  : names[curSong],
         'play_str'  : "Start",
         'mode_str'  : "Manual"
     }
@@ -189,6 +204,13 @@ def action(flag):
         time_stop = time.perf_counter()
         prev_in = -1
         while True:
+            if getLines.get_values()[0] == 1:
+                templateData = {
+                    'song'  : names[curSong],
+                    'play_str'  : "Stop",
+                    'mode_str'  : "Manual"
+                }
+                return render_template('index.html', **templateData)
             if getLines.get_values()[1] == 1:
                 record = not record
                 if record:
@@ -212,9 +234,13 @@ def action(flag):
             time.sleep(0.001)
             inputF.seek(0)
             aVal2 = int(inputF.read())
+            inputF2.seek(0)
+            offset = 0
+            if int(inputF2.read()) >= 2:
+                offset = 17
             if aVal != aVal2:
                 continue
-            index = getIndex(aVal)
+            index = getIndex(aVal) + offset
             if record and index != prev_in and record_in < NUM_RECORD:
                 time_stop = time.perf_counter()
                 rec_times[record_in] = time_stop - time_start
@@ -231,13 +257,6 @@ def action(flag):
                 play_obj.stop()
                 time.sleep(0.35)
                 play_obj = sa.play_buffer(audios[index], 1, 2, fs)
-            if getLines.get_values()[0] == 1:
-                templateData = {
-                    'song'  : names[curSong],
-                    'play_str'  : "Stop",
-                    'mode_str'  : "Manual"
-                }
-                return render_template('index.html', **templateData)
     ledLines.set_values([0,0])
     templateData = {
         'song'  : names[curSong],

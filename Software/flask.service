@@ -1,0 +1,13 @@
+[Unit]
+Description=sound app
+After=sysinit.target
+
+[Service]
+WorkingDirectory=/home/debian/git/ECE434FinalProject/Software 
+User=debian
+ExecStart=/home/debian/git/ECE434FinalProject/Software/recordingServer.py
+SyslogIdentifier=flask
+#Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
