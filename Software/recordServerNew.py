@@ -121,8 +121,9 @@ app.secret_key = "my_key"
 @app.route("/")
 def index():
     global names
+    global curSong
     templateData = {
-        'song'  : names[0],
+        'song'  : names[curSong],
         'play_str'  : "Start",
         'mode_str'  : "Manual"
     }
@@ -203,6 +204,13 @@ def action(flag):
         time_stop = time.perf_counter()
         prev_in = -1
         while True:
+            if getLines.get_values()[0] == 1:
+                templateData = {
+                    'song'  : names[curSong],
+                    'play_str'  : "Stop",
+                    'mode_str'  : "Manual"
+                }
+                return render_template('index.html', **templateData)
             if getLines.get_values()[1] == 1:
                 record = not record
                 if record:
@@ -249,13 +257,6 @@ def action(flag):
                 play_obj.stop()
                 time.sleep(0.35)
                 play_obj = sa.play_buffer(audios[index], 1, 2, fs)
-            if getLines.get_values()[0] == 1:
-                templateData = {
-                    'song'  : names[curSong],
-                    'play_str'  : "Stop",
-                    'mode_str'  : "Manual"
-                }
-                return render_template('index.html', **templateData)
     ledLines.set_values([0,0])
     templateData = {
         'song'  : names[curSong],
