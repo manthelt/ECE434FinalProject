@@ -38,7 +38,7 @@ Logan Manthey
 | *Project Overview* |
 
 
-This project is centered around making a digital synth using a custom designed keyboard cape. The inspiration for this project came from the Stylophone, an analog synth which used a stylus keyboard.
+This project is centered around making a digital synth using a custom designed keyboard cape. The inspiration for this project came from the Stylophone, an analog synth which used a stylus keyboard. Our project currently has capability to play songs, navigate songs, take and play user input, record and play back user input, and has two octaves for that "manual mode". We also have a simple UI via Flask for the controls, and the display of the title of the current song. We wanted to add audio visualisation on an LCD, but we were barely even able to get anything to display on the LCD. We gave that up as we sunk too many hours into it and would rather add new features. Our project has many different capabilities related to sound.
 
 <!---
 Give two sentence intro to the project.
