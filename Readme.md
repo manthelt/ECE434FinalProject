@@ -66,10 +66,9 @@ This project is centered around making a digital synth using a custom designed k
 
 
 ### Video
-***Here is a video that shows our project in operation.
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+Here is a video that shows our project in operation.
 
-<!-- Include a YouTube demo the audio description. -->
+[Sound Project Demo Video](https://youtu.be/Gq4ZqvmgP8Y?si=p0Maj8yswmgwlebh)
 
 ## Theory of Operation
 - Input from buttons > navigate through songs > display via Flask
