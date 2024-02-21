@@ -78,7 +78,7 @@ The sentence count is approximate and only to give an idea of the expected lengt
 - Play a variety of songs
 - Backward, pause/play, and skip functionalities
 - "Manual mode" that allows the user to play their own sequence of notes
-***Here is where you brag about what your project can do.
+- Record a sequence of notes and play them back
 
 
 ### Video
