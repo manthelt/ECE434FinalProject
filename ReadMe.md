@@ -49,7 +49,8 @@ The sentence count is approximate and only to give an idea of the expected lengt
 -->
 
 ## Packaging
-***If you have hardware, consider Small Build, Big Execuition for ideas on the final packaging.
+- Most of our product is standard wires, pots, switch buttons, etc. except for our custom "Keyboard Cape"
+- Our cape acts as a voltage divider, allowing us to read in analog values of voltage to differentiate between notes
 
 ## Installation Instructions
 ***Give step by step instructions on how to install your project.
@@ -74,6 +75,9 @@ The sentence count is approximate and only to give an idea of the expected lengt
 ***Consider making it autostart for full credit. (add line to setup.sh)
 
 ## Highlights
+- Play a variety of songs
+- Backward, pause/play, and skip functionalities
+- "Manual mode" that allows the user to play their own sequence of notes
 ***Here is where you brag about what your project can do.
 
 
@@ -85,6 +89,8 @@ The sentence count is approximate and only to give an idea of the expected lengt
 <!-- Include a YouTube demo the audio description. -->
 
 ## Theory of Operation
+- Input from buttons > navigate through songs > display via Flask
+- Input from cape while in manual mode > play various notes
 ***Give a high level overview of the structure of your software. Are you using GStreamer? Show a diagram of the pipeline. Are you running multiple tasks? Show what they do and how they interact.
 
 
@@ -168,6 +174,9 @@ In addition to the keyboard acting as a potentiometer there is also a normal pot
 - Button input via gpio
 
 #### Creating Sound
+- While in manual mode, user hits the keys with connected wire
+- Software reads in analog voltage input via /sys/bus/iio
+- That analog voltage value corresponds to a frequency that is then played
 ***This section talks about how the sound is created 
 
 #### Start Up
