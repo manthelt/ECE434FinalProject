@@ -83,7 +83,7 @@ for i in range(numNotes*2):
     # Generate a [frequency] Hz sine wave
     note_short = np.sin(frequency*t_short*2*np.pi)
     # Ensure that highest value is in 16-bit range
-    note_short = note_short * (2**11 - 1) / np.max(np.abs(note_short))
+    note_short = note_short * (2**14 - 1) / np.max(np.abs(note_short))
     note = np.resize(note_short, seconds * fs)
     
     # Convert to 16-bit data
@@ -207,7 +207,7 @@ def action(flag):
             if getLines.get_values()[0] == 1:
                 templateData = {
                     'song'  : names[curSong],
-                    'play_str'  : "Stop",
+                    'play_str'  : "Start",
                     'mode_str'  : "Manual"
                 }
                 return render_template('index.html', **templateData)
@@ -223,7 +223,7 @@ def action(flag):
                     ledLines.set_values([0,0])
                     templateData = {
                         'song'  : names[curSong],
-                        'play_str'  : "Stop",
+                        'play_str'  : "Start",
                         'mode_str'  : "Manual"
                     }
                     return render_template('index.html', **templateData)
@@ -236,11 +236,13 @@ def action(flag):
             aVal2 = int(inputF.read())
             inputF2.seek(0)
             offset = 0
-            if int(inputF2.read()) >= 2:
+            if int(inputF2.read()) >= 1:
                 offset = 17
             if aVal != aVal2:
                 continue
-            index = getIndex(aVal) + offset
+            index = getIndex(aVal)
+            if index >= 0:
+                index = index + offset
             if record and index != prev_in and record_in < NUM_RECORD:
                 time_stop = time.perf_counter()
                 rec_times[record_in] = time_stop - time_start
