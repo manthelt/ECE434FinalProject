@@ -69,9 +69,8 @@ The sentence count is approximate and only to give an idea of the expected lengt
 <!-- If there is extra hardware needed, include links to where it can be obtained. -->
 
 ## User Instructions
-1. Run ./soundExperiments.py
+1. Run ./recordServerNew.py
 2. Visit https://localhost:8081
-***Consider making it autostart for full credit. (add line to setup.sh)
 
 ## Highlights
 - Play a variety of songs
@@ -91,7 +90,6 @@ The sentence count is approximate and only to give an idea of the expected lengt
 - Input from buttons > navigate through songs > display via Flask
 - Input from cape while in manual mode > play various notes
 - Manual mode is navigated to the same way other songs are > input only taken in during manual mode > other songs do not play during manual mode
-***Give a high level overview of the structure of your software. Are you using GStreamer? Show a diagram of the pipeline. Are you running multiple tasks? Show what they do and how they interact.
 
 
 
@@ -183,8 +181,12 @@ In addition to the keyboard acting as a potentiometer there is also a normal pot
 - Notes are read in via /sys/bus/iio
 - Durations are determined based on the time the user started playing the note and when they stopped
 
-#### Start Up
-***Talk about how the software boots up on startup
+#### Changing Octaves
+- Take in input from potentiometer
+- Use that value as a boolean to determine offset for array index of frequencies
+
+#### Switching Songs
+- Buttons on Flask navigate to new page to control navigation through songs
 
 
 ## Work Breakdown
