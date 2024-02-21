@@ -50,6 +50,13 @@ This project is centered around making a digital synth using a custom designed k
 1. Clone the repo
 2. Run sudo ./install.sh
 3. Run sudo ./setup.sh
+4. Move .asoundrc to your home directory
+5. Use aplay -l to find out which card your USB Audio device is setup as
+6. Change 
+    pcm "hw:0,0" -> pcm "hw:[card #],0" 
+    and
+    card 0 -> card [card #]
+    in ~/.asoundrc
 
 - Custom PCB schematic in 'Schematic and PCB'
 - USB Surround Sound Adapter: https://sabrent.com/products/usb-sbcv
