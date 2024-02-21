@@ -53,7 +53,6 @@ The sentence count is approximate and only to give an idea of the expected lengt
 - Our cape acts as a voltage divider, allowing us to read in analog values of voltage to differentiate between notes
 
 ## Installation Instructions
-***Give step by step instructions on how to install your project.
 - Read-only GitHub: https://github.com/manthelt/ECE434FinalProject
 
 1. Clone the repo
@@ -91,6 +90,7 @@ The sentence count is approximate and only to give an idea of the expected lengt
 ## Theory of Operation
 - Input from buttons > navigate through songs > display via Flask
 - Input from cape while in manual mode > play various notes
+- Manual mode is navigated to the same way other songs are > input only taken in during manual mode > other songs do not play during manual mode
 ***Give a high level overview of the structure of your software. Are you using GStreamer? Show a diagram of the pipeline. Are you running multiple tasks? Show what they do and how they interact.
 
 
@@ -177,7 +177,11 @@ In addition to the keyboard acting as a potentiometer there is also a normal pot
 - While in manual mode, user hits the keys with connected wire
 - Software reads in analog voltage input via /sys/bus/iio
 - That analog voltage value corresponds to a frequency that is then played
-***This section talks about how the sound is created 
+
+#### Storing Recorded Sound
+- User hits keys
+- Notes are read in via /sys/bus/iio
+- Durations are determined based on the time the user started playing the note and when they stopped
 
 #### Start Up
 ***Talk about how the software boots up on startup
