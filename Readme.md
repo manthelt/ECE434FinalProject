@@ -1,11 +1,10 @@
-# ECE434 Digital Synth Project
-Logan Manthey
-
+# ECE434 Sound Project
+Logan Manthey, Ash 
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
-- [ECE434 Digital Synth Project](#ece434-digital-synth-project)
+- [ECE434 Sound Project](#ece434-sound-project)
     - [Executive Summary](#executive-summary)
     - [Packaging](#packaging)
     - [Installation Instructions](#installation-instructions)
@@ -22,6 +21,7 @@ Logan Manthey
         - [Software](#software)
             - [Reading in the values](#reading-in-the-values)
             - [Creating Sound](#creating-sound)
+            - [Storing Recorded Sound](#storing-recorded-sound)
             - [Start Up](#start-up)
     - [Work Breakdown](#work-breakdown)
     - [Future Work](#future-work)
@@ -33,7 +33,7 @@ Logan Manthey
 
 ## Executive Summary
 
-| ![PCBRende:r](Hardware/Assembled.png) | 
+| ![PCBRende:r](Hardware/overall.png) | 
 |:--:| 
 | *Project Overview* |
 
@@ -69,8 +69,9 @@ The sentence count is approximate and only to give an idea of the expected lengt
 <!-- If there is extra hardware needed, include links to where it can be obtained. -->
 
 ## User Instructions
-1. Run ./recordServerNew.py
+1. Run ./soundExperiments.py
 2. Visit https://localhost:8081
+***Consider making it autostart for full credit. (add line to setup.sh)
 
 ## Highlights
 - Play a variety of songs
@@ -83,13 +84,14 @@ The sentence count is approximate and only to give an idea of the expected lengt
 ***Here is a video that shows our project in operation.
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
 
-
 <!-- Include a YouTube demo the audio description. -->
 
 ## Theory of Operation
 - Input from buttons > navigate through songs > display via Flask
 - Input from cape while in manual mode > play various notes
 - Manual mode is navigated to the same way other songs are > input only taken in during manual mode > other songs do not play during manual mode
+
+***Give a high level overview of the structure of your software. Are you using GStreamer? Show a diagram of the pipeline. Are you running multiple tasks? Show what they do and how they interact.
 
 
 
@@ -181,13 +183,9 @@ In addition to the keyboard acting as a potentiometer there is also a normal pot
 - Notes are read in via /sys/bus/iio
 - Durations are determined based on the time the user started playing the note and when they stopped
 
-#### Changing Octaves
-- Take in input from potentiometer
-- Use that value as a boolean to determine offset for array index of frequencies
-
-#### Switching Songs
-- Buttons on Flask navigate to new page to control navigation through songs
-
+#### Start Up
+<!-- ***Talk about how the software boots up on startu -->p
+To boot the software a systemd service can be used with the flask application. 
 
 ## Work Breakdown
 
@@ -197,7 +195,7 @@ In addition to the keyboard acting as a potentiometer there is also a normal pot
 - Sound Generation and USB Audio
   Logan, Ash, Larissa
 
-- LCD Visualisation (not working - dropped)
+- LCD Visualization (not working - dropped)
   Ash, Larissa
 
 - Flask
@@ -209,9 +207,33 @@ In addition to the keyboard acting as a potentiometer there is also a normal pot
 ## Future Work
 In the future we would modify the cape a bit and add a spot for a pull down resistor along with getting it professionally printed to allow for a silk screen on it. I would also add more pins to the header to allow for more stability. We would also like to be able to get audio visualisation via the LCD working.
 
-***Suggest addition things that could be done with this project.
+<!-- ***Suggest addition things that could be done with this project. -->
+
+Future Additions
+       - More features on the Flask App
+       - More Synth Options and possbile Digital Signal Processing
+         - Possible Second Pot Features
+           - Pitch Bend
+           - Wave Adjustment (Example: Sin Wave to Sawtooth to Square)
+        - Being able to play over background songs and beats
+          - This would let you solo with the keyboard over tunes like free bird
+        - Adding a loop for recording playback would be able to allow for more intense soloing
+        - LCD Screen
+          - We attempted to get the LCD screen to work with the bone but this proved to be very
+            difficult especially with a UI if we had LCD working with it we could make it into a
+            smaller self contained package
+        - Hardware
+          - Adding buttons to the cape
+          - Making the cape more stable on the bone
+          - Printing the PCB at a PCB House
+
 
 ## Conclusions
-***Give some concluding thoughts about the project. Suggest some future additions that could make it even more interesting.
+<!-- ***Give some concluding thoughts about the project. Suggest some future additions that could make it even more interesting. -->
 
+Overall our group thinks our project was a success. Our approach of making something simple and
+adding features to it proved to be very useful and allowed us to pivot as needed. This also
+allowed us to always have something to demo at every stage of our project. We also thought
+the interactive nature of the project made this a really fun project to demo.
 
+Above in future work shows a few different features that we would like to add to the project.
