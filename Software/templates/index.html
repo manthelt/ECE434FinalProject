@@ -4,17 +4,7 @@
     <link rel="stylesheet" href='../static/style.css'/> 
  </head>
  <body>
-    {% with msg = get_flashed_messages() %}
-    {% if msg %}
-    {% for message in msg %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>{{ message }}</strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-    <div>Song playing {{ song }}</div>
+    <h2>Song playing: {{ song }}</h2>
     <div class="row">
         <div class="padding"><a href="/prev"class="button">Prev song</a></div>
         <div class="padding"><a href="/next"class="button">Next song</a></div>
@@ -24,6 +14,9 @@
     </div>
     <div class="row">
         <div class="padding"><a href="/mode"class="button">{{ mode_str }}</a></div>
+    </div>
+    <div class="row">
+        <div class="padding"><a href="/playback"class="button">Play Recording</a></div>
     </div>
  </body>
 </html>

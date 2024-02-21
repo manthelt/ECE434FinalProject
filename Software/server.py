@@ -2,9 +2,8 @@
 # server.py
 # Author: Ash Collins
 # Edited: 2/20/2024
-import gpiod
 # import smbus
-from flask import Flask, render_template
+from flask import Flask, render_template, flash
 import numpy as np
 import simpleaudio as sa
 import time
@@ -42,16 +41,16 @@ CONSUMER = 'sounds'
 switchChip = gpiod.Chip('0')
 getLines = switchChip.get_lines([30, 31, 5, 13])
 getLines.request(consumer=CONSUMER, type=gpiod.LINE_REQ_DIR_IN)
-NUM_SONGS = 2
-songs = [sa.WaveObject.from_wave_file('Rickroll.wav'), sa.WaveObject.from_wave_file('LateAtNight.wav')]
-names = ["Never Gonna Give You Up", "Late Night"]
+NUM_SONGS = 3
+songs = [sa.WaveObject.from_wave_file('Rickroll.wav'), sa.WaveObject.from_wave_file('LateAtNight.wav'), sa.WaveObject.from_wave_file('BlueHair.wav')]
+names = ["Never Gonna Give You Up", "Late Night", "Blue Hair"]
 curSong = 0
 songPlaying = 0
 manualInput = False
 
 
-wave_obj = sa.WaveObject.from_wave_file('Rickroll.wav')
-play_obj2 = wave_obj.play()
+#wave_obj = sa.WaveObject.from_wave_file('Rickroll.wav')
+# play_obj2 = wave_obj.play()
 
 def getIndex(val):
     for i in range(numNotes):
@@ -80,18 +79,38 @@ inputF.seek(0)
 frequency = frequencies[getIndex(aVal)]
 
 # Start playback
-play_obj2.stop()
+# play_obj2.stop()
 time.sleep(0.3)
 play_obj = sa.play_buffer(audios[0], 1, 2, fs)
 play_obj.stop()
 
 app = Flask(__name__)
+app.secret_key = "my_key"
 @app.route("/")
 def index():
-    return render_template('index.html')
+    global names
+    templateData = {
+        'song'  : names[0],
+        'play_str'  : "Play",
+        'mode_str'  : "Manual"
+    }
+    return render_template('index.html', **templateData)
 
 @app.route("/<flag>")
 def action(flag):
+    global curSong
+    global play_obj
+    global songs
+    global names
+    global songPlaying
+    global manualInput
+    global inputF
+    global aVal
+    global aVal2
+    global frequency
+    global frequencies
+    global getLines
+    global audios
     if flag == "prev": 
         curSong = (curSong + NUM_SONGS - 1) % NUM_SONGS
         if play_obj.is_playing():
@@ -142,9 +161,6 @@ def action(flag):
             }
             return render_template('index.html', **templateData)
     if flag == "mode":
-        manualInput = not manualInput
-        if manualInput:
-            flash("Taking manual input. Please wait.")
         while True:
             inputF.seek(0)
             aVal = int(inputF.read())
@@ -164,9 +180,13 @@ def action(flag):
                 time.sleep(0.35)
                 play_obj = sa.play_buffer(audios[index], 1, 2, fs)
             if getLines.get_values()[0] == 1:
-                session.pop('_flashes', None)
-                break
-    return render_template('index.html')
+                # session.pop('_flashes', None)
+                templateData = {
+                    'song'  : names[curSong],
+                    'play_str'  : "Pause",
+                    'mode_str'  : "Manual"
+                }
+                return render_template('index.html', **templateData)
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=8081, debug=True)
