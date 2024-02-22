@@ -1,5 +1,5 @@
 # ECE434 Sound Project
-Logan Manthey, Ash 
+ Larissa Krakora, Ash Collins, Logan Manthey
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
