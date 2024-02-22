@@ -46,6 +46,8 @@ This project is centered around making a digital synth using a custom designed k
 - Our cape acts as a voltage divider, allowing us to read in analog values of voltage to differentiate between notes
 
 Hackster IO Link: https://www.hackster.io/larissa3/sound-project-77327a
+
+
 ELinux Page Link: https://elinux.org/ECE434_Project_-_Sound_Project
 
 
